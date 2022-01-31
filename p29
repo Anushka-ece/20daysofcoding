@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool checkIfExist(vector<int>& arr) {
+        unordered_set<int>mp;
+        for(int i:arr)
+        {
+            if(mp.find(i*2)!=mp.end() || mp.find(i/2)!=mp.end() && i%2==0)
+                return true;
+            mp.insert(i);
+        }
+        return false;
+    }
+};
