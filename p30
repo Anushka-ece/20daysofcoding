@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool validMountainArray(vector<int>& arr) {
+             int n = arr.size();
+        //Base Case
+        if(n < 3) return false;
+
+        int i = 1;//start from i=1
+        while(i<n && arr[i-1] < arr[i]) i++;//check for strictly increasing
+        
+//in case if pointer never moved ahead of 1 or either when it has reached to end then false will be returned
+        if(i == 1 || i == n) return false;
+
+        while(i<n && arr[i-1] > arr[i]) i++;//check for strictly deccreasing
+        
+        //In this case when it has reached to end this signifies that conditions are running well
+        if(i == n) return true;
+    
+        return false;
+    }
+};
