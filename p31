@@ -1,0 +1,23 @@
+class Solution {
+public:
+     int max_el(int l,int r,vector<int>& arr)
+        {
+            int el=INT_MIN;
+            for(int i=l;i<=r;i++)
+            {
+                el=max(el,arr[i]);
+            }
+            return el;
+        }
+    vector<int> replaceElements(vector<int>& arr) {
+        int n=arr.size();
+        vector<int>ans;
+       
+        for(int i=0;i<n-1;i++)
+        {
+            ans.push_back(max_el(i+1,n-1,arr));
+        }
+        ans.push_back(-1);
+        return ans;
+    }
+};
