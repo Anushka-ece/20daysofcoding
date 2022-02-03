@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solvetestcase()
+{
+    int x;
+    cin>>x;
+    int a=x;
+    int b=x|(1<<28);//we are marking 28th bit here
+    int c=x|(1<<29);//we are marking 29th bit here
+    
+    cout<<a<<" "<<b<<" "<<c<<endl;
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        solvetestcase();
+    }
+ return 0;   
+}
