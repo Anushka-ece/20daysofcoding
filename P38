@@ -1,0 +1,125 @@
+class Node
+{
+    public:
+    int val;
+    Node* next;
+};
+
+
+class MyLinkedList {
+public:
+    Node* head;
+    MyLinkedList() {
+        head=NULL;
+    }
+    
+    int get(int index) {//find out the value at ith index
+        int i=-1;//initialize with -1
+        Node* curr=head;//first element of linked list is head
+        while(curr!=NULL)//we will iterate till th eend of the array i.e upto the point when current does not //become equal to NULL
+        {
+            i++;//increase value of iterator i for index
+            if(i==index)//if desired index is found
+            {
+                return curr->val;
+                
+            }
+            curr=curr->next;
+        }
+        return -1;//return -1 at end in case when no i value was equal to index
+        
+    }
+    
+    void addAtHead(int val) {
+        Node* n=new Node();//created new node here
+        n->val=val;//assign a value of val here
+        if(head!=NULL)//when a value already exitsed previously for head
+        {
+          n->next=head;
+        }
+        else//if there was no value at head
+        {
+            n->next=NULL;
+        }
+        head=n;//finally assign n to head
+    }
+    
+    void addAtTail(int val) {
+       if(head==NULL)//in case head is already NULL then addition at tail will be equivalent to addition at head
+       {
+addAtHead(val);
+           return;
+       }
+        //perform steps to reach till end index of the linked list
+        Node* curr=head;
+        while(curr!=NULL && curr->next!=NULL)//this will help us to identify the last index and will stop at //last index
+        {
+
+        curr=curr->next;
+            }
+        //now we have reached to last index so let's create new node and make it new tail
+        Node* n=new Node();
+        n->val=val;
+        n->next=NULL;
+        curr->next=n;
+        
+    }
+    
+    void addAtIndex(int index, int val) {
+        int i=-1;
+        if(index==0)
+        {
+            addAtHead(val);
+            return; 
+        }
+        Node* curr=head;
+        Node* n=new Node();
+        while(curr!=NULL)
+        {
+          i++;
+            if(i==index-1)
+            {
+                n->val=val;
+                n->next=curr->next;//link with next node
+                curr->next=n;//link with previous node
+                return ;
+            }
+            curr=curr->next;
+        }
+        
+    }
+    
+    void deleteAtIndex(int index) {
+        int i=-1;
+        Node* curr=head;
+       if(index==0)
+       {
+           if(head==NULL)
+           {
+               return ;
+           }
+           else
+           {
+               head=curr->next;
+               delete(curr);
+               return;
+           }
+       }
+        while(curr!=NULL)
+        {
+            i++;
+            if(i==index-1)
+            {
+                 if(curr->next==nullptr){
+                    return;
+                }
+                Node *temp=curr->next;
+                curr->next=curr->next->next;
+                delete temp;
+                // cout<<"getatindex"<<cur->val;
+                return;
+            }
+            curr=curr->next;
+        }
+    }
+};
