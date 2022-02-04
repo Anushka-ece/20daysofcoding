@@ -1,0 +1,46 @@
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int m=0;//size of linked list A
+        int n=0;//size of linked list B
+        ListNode* startA=headA;
+        ListNode* startB=headB;
+        while(startA!=NULL)//find length of linked list A
+        {
+            startA=startA->next;
+            m++;
+        }
+        while(startB!=NULL)//find length of linked list B
+        {
+          startB=startB->next;
+            n++;
+        }
+        //After finding lengths of both the arrays,now we have to put headA and headB again to startA and startB
+        startA=headA;
+        startB=headB;
+        int diff=abs(m-n);
+        if(m>n)
+        {
+            for(int i=0;i<diff;i++)
+            {
+                startA=startA->next;
+            }
+        }
+        else
+        {
+            for(int i=0;i<diff;i++)
+            {
+                startB=startB->next;
+            }
+        }
+        while(startA && startB)
+        {
+            if(startA==startB)
+                return startB;
+            startA=startA->next;
+            startB=startB->next;
+            
+        }
+        return NULL;//if no common element found
+    }
+};
