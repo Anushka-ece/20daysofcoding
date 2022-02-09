@@ -1,0 +1,57 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int last_digit=0;
+        int carry=0;
+        ListNode* head=new ListNode();
+        ListNode* curr=head;
+        ListNode* prev;
+        
+        //when both are of the same length
+        while(l1!=NULL && l2!=NULL)
+        {
+            int data=l1->val+l2->val+carry;
+            last_digit=data%10;
+            carry=data/10;
+            l1=l1->next;
+            l2=l2->next;
+            curr->val=last_digit;
+            curr->next=new ListNode();
+            prev=curr;
+            curr=curr->next;
+        }
+        //when l1 is greater than l2 in length
+        while(l1!=NULL)
+        {
+            int data=l1->val+carry;
+            last_digit=data%10;
+            carry=data/10;
+            l1=l1->next;
+            curr->val=last_digit;
+            curr->next=new ListNode();
+            prev=curr;
+            curr=curr->next;
+        }
+        //when l2 is greater than l1
+        while(l2!=NULL)
+        {
+            int data=l2->val+carry;
+            last_digit=data%10;
+            carry=data/10;
+            l2=l2->next;
+            curr->val=last_digit;
+            curr->next=new ListNode();
+            prev=curr;
+            curr=curr->next;
+        }
+        //if carry still exists
+        if(carry!=0)
+        {
+            curr->val=carry;
+            return head;
+        }
+       //in case when carry is 0
+        prev->next=NULL;
+        return head;
+    }
+};
