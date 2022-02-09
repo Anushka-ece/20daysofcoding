@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int>st;
+        queue<int>q;
+        ListNode* curr=head;
+        while(curr!=NULL)
+        {
+            st.push(curr->val);
+            q.push(curr->val);
+            curr=curr->next;
+        }
+        while(!st.empty())
+        {
+            if(st.top()!=q.front())
+                return false;
+            st.pop();
+            q.pop();
+        }
+        return true;
+    }
+};
