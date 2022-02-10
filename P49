@@ -1,0 +1,72 @@
+class MyCircularQueue {
+public:
+    //front=front of the queue
+    //rear=rear of the queue
+    //sz=maximum size of the queue
+    //len=curreny length of the queue
+    
+    int front,rear,sz,len=0;
+    vector<int>cir_queue;//linear representation of the circular queue
+    
+    MyCircularQueue(int k) {
+        //k is the limit of the given circular queue
+        sz=k;
+        front=0;
+        rear=0;
+        //initialize -1 to all position sin the circular queue
+        cir_queue.assign(k,-1);
+    }
+    
+    bool enQueue(int value){
+        //firstly check if the queue is fully occupied
+        if(isFull())
+            return false;
+        
+        //otherwise increase the size of the array
+        len++;
+        
+        cir_queue[rear]=value;
+        rear++;
+    rear%=sz;//this is done to ensure that rear remains withing the bound and does not become greater than sz
+        
+        return true;
+    }
+    
+    bool deQueue() {
+        if(isEmpty())
+            return false;
+        //otherwise decrease the size of the queue
+        len--;
+        cir_queue[front]=-1;//since removing element from front
+        front=(front+1)%sz;//front is assigne to the next index
+        return true;
+    }
+    
+    int Front() {
+        if(isEmpty())
+            return -1;
+        else
+            return cir_queue[front];
+    }
+    
+    int Rear() {
+        if(isEmpty())
+            return -1;
+        int index=rear-1;
+        if(index<0)
+            index=index+sz;
+        return cir_queue[index];
+    }
+    
+    bool isEmpty() {
+        if(len==0)
+            return true;
+        return false;
+    }
+    
+    bool isFull() {
+        if(len==sz)
+            return true;
+        return false;
+    }
+};
